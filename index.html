@@ -1,274 +1,200 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAVAGE Portfolio - Developer Showcase</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <!-- Terminal Loading Screen -->
-    <div class="terminal-loader" id="terminalLoader">
-        <div class="terminal-content">
-            <div class="terminal-header">
-                <div class="terminal-buttons">
-                    <span class="btn close"></span>
-                    <span class="btn minimize"></span>
-                    <span class="btn maximize"></span>
-                </div>
-                <div class="terminal-title">terminal@SAVAGE</div>
-            </div>
-            <div class="terminal-body">
-                <div class="terminal-line">
-                    <span class="prompt">$</span>
-                    <span class="command" id="bootCommand">Initializing portfolio...</span>
-                </div>
-                <div class="terminal-output" id="bootOutput"></div>
-            </div>
-        </div>
-    </div>
+# SAHIL Portfolio - Terminal Developer Showcase
 
-    <!-- Matrix Background -->
-    <canvas id="matrixCanvas" class="matrix-bg"></canvas>
+A cutting-edge portfolio website featuring a terminal/cyberpunk aesthetic with interactive elements and a unique developer presentation.
 
-    <!-- Navigation -->
-    <nav class="nav-container" id="navContainer">
-        <div class="nav-left">
-            <div class="logo-terminal">
-                <span class="prompt">$</span>
-                <span class="logo-text">SAVAGE</span>
-            </div>
-        </div>
-        <div class="nav-center">
-            <div class="nav-menu">
-                <a href="#home" class="nav-link" data-section="home">
-                    <i class="fas fa-home"></i>
-                    <span>Home</span>
-                </a>
-                <a href="#projects" class="nav-link" data-section="projects">
-                    <i class="fas fa-code"></i>
-                    <span>Projects</span>
-                </a>
-                <a href="#skills" class="nav-link" data-section="skills">
-                    <i class="fas fa-terminal"></i>
-                    <span>Skills</span>
-                </a>
-                <a href="#contact" class="nav-link" data-section="contact">
-                    <i class="fas fa-envelope"></i>
-                    <span>Contact</span>
-                </a>
-            </div>
-        </div>
-        <div class="nav-right">
-            <div class="theme-toggle" id="themeToggle">
-                <i class="fas fa-moon"></i>
-            </div>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+![SAHIL Portfolio](https://via.placeholder.com/800x400/0d1117/00ff41?text=SAHIL+Portfolio+Terminal)
 
-    <!-- Main Content -->
-    <main class="main-container">
-        <!-- Hero Section -->
-        <section class="hero-section" id="home">
-            <div class="hero-content">
-                <div class="hero-terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-buttons">
-                            <span class="btn close"></span>
-                            <span class="btn minimize"></span>
-                            <span class="btn maximize"></span>
-                        </div>
-                        <div class="terminal-title">about@SAVAGE</div>
-                    </div>
-                    <div class="terminal-body">
-                        <div class="typing-text">
-                            <span class="prompt">$</span>
-                            <span id="typingText"></span>
-                            <span class="cursor">_</span>
-                        </div>
-                        <div class="terminal-stats">
-                            <div class="stat-line">
-                                <span class="prompt">$</span>
-                                <span>cat developer.info</span>
-                            </div>
-                            <div class="stat-content">
-                                <p><span class="key">Name:</span> <span class="value">SAVAGE</span></p>
-                                <p><span class="key">Role:</span> <span class="value">Full Stack Developer</span></p>
-                                <p><span class="key">Specialty:</span> <span class="value">Creative Solutions</span></p>
-                                <p><span class="key">Status:</span> <span class="value status-online">● Available for work</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="code-rain">
-                        <div class="code-line"></div>
-                        <div class="code-line"></div>
-                        <div class="code-line"></div>
-                    </div>
-                    <div class="profile-hexagon">
-                        <div class="hex-content">
-                            <i class="fas fa-code"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+## 🚀 Unique Features
 
-        <!-- Projects Section -->
-        <section class="projects-section" id="projects">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span class="prompt">$</span>
-                    ls projects/
-                </h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="projects-grid" id="projectsGrid">
-                <!-- Projects will be dynamically loaded -->
-            </div>
-        </section>
+### Terminal-Inspired Design
+- **Terminal Loading Screen**: Boot sequence animation with command-line style initialization
+- **Matrix Background**: Animated matrix rain effect for that hacker aesthetic
+- **Terminal Windows**: All sections presented as terminal windows with realistic UI
+- **Command-Line Interface**: Interactive elements styled as terminal commands
 
-        <!-- Skills Section -->
-        <section class="skills-section" id="skills">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span class="prompt">$</span>
-                    cat skills.txt
-                </h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="skills-container">
-                <div class="skill-categories">
-                    <div class="skill-category active" data-category="all">All</div>
-                    <div class="skill-category" data-category="frontend">Frontend</div>
-                    <div class="skill-category" data-category="backend">Backend</div>
-                    <div class="skill-category" data-category="tools">Tools</div>
-                </div>
-                <div class="skills-grid" id="skillsGrid">
-                    <!-- Skills will be dynamically loaded -->
-                </div>
-            </div>
-        </section>
+### Interactive Elements
+- **Typing Animation**: Dynamic text that types and deletes itself in the hero section
+- **Smooth Scrolling**: Seamless navigation between sections
+- **Hover Effects**: Interactive cards with matrix-style hover states
+- **Progress Animations**: Animated skill bars that fill on scroll
+- **Mobile Responsive**: Fully functional on all devices
 
-        <!-- Contact Section -->
-        <section class="contact-section" id="contact">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span class="prompt">$</span>
-                    ./contact.sh
-                </h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="contact-container">
-                <div class="contact-terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-buttons">
-                            <span class="btn close"></span>
-                            <span class="btn minimize"></span>
-                            <span class="btn maximize"></span>
-                        </div>
-                        <div class="terminal-title">contact@SAVAGE</div>
-                    </div>
-                    <div class="terminal-body">
-                        <form class="contact-form" id="contactForm">
-                            <div class="form-group">
-                                <label for="name">
-                                    <span class="prompt">$</span>
-                                    echo "Name:"
-                                </label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">
-                                    <span class="prompt">$</span>
-                                    echo "Email:"
-                                </label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">
-                                    <span class="prompt">$</span>
-                                    echo "Subject:"
-                                </label>
-                                <input type="text" id="subject" name="subject" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">
-                                    <span class="prompt">$</span>
-                                    echo "Message:"
-                                </label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn">
-                                <span class="prompt">$</span>
-                                ./send_message.sh
-                            </button>
-                        </form>
-                        <div class="form-output" id="formOutput"></div>
-                    </div>
-                </div>
-                <div class="contact-info">
-                    <div class="info-terminal">
-                        <div class="terminal-header">
-                            <div class="terminal-buttons">
-                                <span class="btn close"></span>
-                                <span class="btn minimize"></span>
-                                <span class="btn maximize"></span>
-                            </div>
-                            <div class="terminal-title">info@SAVAGE</div>
-                        </div>
-                        <div class="terminal-body">
-                            <div class="info-line">
-                                <span class="prompt">$</span>
-                                <span>cat social_links.txt</span>
-                            </div>
-                            <div class="social-links">
-                                <a href="https://github.com/Savage404E" class="social-link" target="_blank">
-                                    <i class="fab fa-github"></i>
-                                    <span>GitHub</span>
-                                </a>
-                                <a href="https://www.linkedin.com/in/sahil-kadam-473096383/" class="social-link" target="_blank">
-                                    <i class="fab fa-linkedin"></i>
-                                    <span>LinkedIn</span>
-                                </a>
-                                <a href="https://discord.com/users/815118435360309248" class="social-link" target="_blank">
-                                    <i class="fab fa-discord"></i>
-                                    <span>Discord (15,000+ members)</span>
-                                </a>
-                                <a href="mailto:sahilkadam@example.com" class="social-link">
-                                    <i class="fas fa-envelope"></i>
-                                    <span>Email</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+### Advanced Features
+- **Project Filtering**: Dynamic project showcase with status indicators
+- **Skills Categories**: Filterable skills by frontend, backend, and tools
+- **Contact Form**: Terminal-styled contact form with validation
+- **Theme Toggle**: Switch between dark and light themes
+- **Social Links**: Integrated social media links in terminal format
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-terminal">
-            <div class="terminal-body">
-                <div class="footer-line">
-                    <span class="prompt">$</span>
-                    <span>echo "© 2024 SAVAGE Portfolio | Built with passion and code"</span>
-                </div>
-            </div>
-        </div>
-    </footer>
+## 🛠️ Technologies Used
 
-    <script src="script.js"></script>
-</body>
-</html>
+- **HTML5**: Semantic markup with modern structure
+- **CSS3**: Advanced animations, grid layouts, and custom properties
+- **Vanilla JavaScript**: No frameworks - pure JavaScript for all interactions
+- **Font Awesome**: Icon library for UI elements
+- **Google Fonts**: JetBrains Mono and Space Grotesk for that developer aesthetic
+
+## 📁 Project Structure
+
+```
+p4/
+├── index.html          # Main HTML structure
+├── styles.css          # Complete styling with terminal theme
+├── script.js           # All JavaScript functionality
+└── README.md           # This file
+```
+
+## 🎨 Design System
+
+### Color Palette
+- **Terminal Green**: #00ff41 (Primary accent)
+- **Matrix Green**: #00ff00 (Background effects)
+- **Terminal Background**: #0d1117 (Dark terminal theme)
+- **Accent Pink**: #ff0080 (Secondary accent)
+- **Border Color**: #30363d (Terminal borders)
+
+### Typography
+- **JetBrains Mono**: Primary monospace font for terminal feel
+- **Space Grotesk**: Modern sans-serif for contrast
+
+### Key Components
+- Terminal windows with realistic UI elements
+- Matrix rain background effect
+- Command-line styled navigation
+- Interactive project cards
+- Animated skill progress bars
+- Terminal-styled contact form
+
+## 🚀 Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd profile-website/p4
+   ```
+
+2. **Run locally**
+   ```bash
+   # Using Python
+   python -m http.server 8000
+   
+   # Or using Node.js
+   npx serve .
+   
+   # Or using PHP
+   php -S localhost:8000
+   ```
+
+3. **Open in browser**
+   Navigate to `http://localhost:8000`
+
+## 🎯 Interactive Features
+
+### Loading Experience
+- Terminal boot sequence with realistic command output
+- Progressive loading messages
+- Smooth fade-out transition
+
+### Navigation System
+- Terminal-styled navigation bar
+- Smooth scroll to sections
+- Active section highlighting
+- Mobile hamburger menu with terminal aesthetic
+
+### Hero Section
+- Animated typing effect with multiple messages
+- Developer information displayed as terminal output
+- Hexagonal profile icon with code rain effect
+- Status indicator with pulse animation
+
+### Projects Showcase
+- Grid layout with terminal-styled cards
+- Project status badges (Active, Completed, In Progress)
+- Technology tags with terminal styling
+- GitHub and demo links
+- Hover animations with border effects
+
+### Skills Display
+- Category filtering (All, Frontend, Backend, Tools)
+- Animated progress bars
+- Terminal-styled skill cards
+- Responsive grid layout
+
+### Contact Form
+- Terminal window design
+- Command-line styled form fields
+- Form validation and feedback
+- Social links integration
+
+## 📱 Responsive Design
+
+The website is fully responsive with:
+- **Desktop**: Full terminal experience with all effects
+- **Tablet**: Optimized layout with touch interactions
+- **Mobile**: Simplified terminal interface with mobile menu
+
+## ⚡ Performance Features
+
+- Optimized animations using CSS transforms
+- Efficient JavaScript with async/await patterns
+- Lazy loading considerations
+- Smooth 60fps animations
+- Minimal resource usage
+
+## 🎨 Customization
+
+### Changing Colors
+Edit the CSS variables in `styles.css`:
+```css
+:root {
+    --terminal-green: #00ff41;
+    --terminal-bg: #0d1117;
+    --matrix-green: #00ff00;
+    /* ... other variables */
+}
+```
+
+### Modifying Projects
+Update the projects array in `script.js`:
+```javascript
+this.projects = [
+    {
+        title: 'Your Project',
+        description: 'Project description',
+        status: 'Active',
+        tech: ['Tech1', 'Tech2'],
+        github: '#',
+        demo: '#'
+    }
+];
+```
+
+### Adding Skills
+Update the skills array in `script.js`:
+```javascript
+this.skills = [
+    { name: 'Skill Name', level: 90, category: 'frontend' }
+];
+```
+
+## 🔧 Browser Support
+
+- Chrome/Chromium (latest 2 versions)
+- Firefox (latest 2 versions)
+- Safari (latest 2 versions)
+- Edge (latest 2 versions)
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 👤 Author
+
+**SAHIL**
+- Full Stack Developer
+- Creative Solutions Architect
+- Terminal Enthusiast
+
+---
+
+*Built with passion for code and terminal aesthetics*

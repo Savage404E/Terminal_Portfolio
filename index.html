@@ -1,200 +1,333 @@
-# SAHIL Portfolio - Terminal Developer Showcase
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SAHIL — Full Stack Developer portfolio with interactive terminal experience">
+    <title>SAHIL | Developer Terminal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- CRT scanline overlay -->
+    <div class="crt-overlay" aria-hidden="true"></div>
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-A cutting-edge portfolio website featuring a terminal/cyberpunk aesthetic with interactive elements and a unique developer presentation.
+    <!-- Terminal Loading Screen -->
+    <div class="terminal-loader" id="terminalLoader">
+        <div class="terminal-content loader-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="btn close"></span>
+                    <span class="btn minimize"></span>
+                    <span class="btn maximize"></span>
+                </div>
+                <div class="terminal-title">boot@SAHIL — init.d</div>
+            </div>
+            <div class="terminal-body">
+                <pre class="ascii-art" id="asciiArt"></pre>
+                <div class="terminal-line">
+                    <span class="prompt">root@SAHIL</span><span class="path">:~$</span>
+                    <span class="command" id="bootCommand"></span><span class="boot-cursor">▌</span>
+                </div>
+                <div class="terminal-output" id="bootOutput"></div>
+                <div class="boot-progress">
+                    <div class="boot-progress-bar" id="bootProgressBar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-![SAHIL Portfolio](https://via.placeholder.com/800x400/0d1117/00ff41?text=SAHIL+Portfolio+Terminal)
+    <!-- Matrix Background -->
+    <canvas id="matrixCanvas" class="matrix-bg"></canvas>
+    <div class="grid-bg" aria-hidden="true"></div>
 
-## 🚀 Unique Features
+    <!-- Scroll progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
 
-### Terminal-Inspired Design
-- **Terminal Loading Screen**: Boot sequence animation with command-line style initialization
-- **Matrix Background**: Animated matrix rain effect for that hacker aesthetic
-- **Terminal Windows**: All sections presented as terminal windows with realistic UI
-- **Command-Line Interface**: Interactive elements styled as terminal commands
+    <!-- Navigation -->
+    <nav class="nav-container" id="navContainer">
+        <div class="nav-left">
+            <a href="#home" class="logo-terminal">
+                <span class="logo-bracket">&lt;</span>
+                <span class="logo-text">SAHIL</span>
+                <span class="logo-bracket">/&gt;</span>
+            </a>
+        </div>
+        <div class="nav-center">
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link" data-section="home"><i class="fas fa-home"></i><span>./home</span></a>
+                <a href="#about" class="nav-link" data-section="about"><i class="fas fa-user"></i><span>./about</span></a>
+                <a href="#projects" class="nav-link" data-section="projects"><i class="fas fa-code"></i><span>./projects</span></a>
+                <a href="#skills" class="nav-link" data-section="skills"><i class="fas fa-microchip"></i><span>./skills</span></a>
+                <a href="#experience" class="nav-link" data-section="experience"><i class="fas fa-briefcase"></i><span>./exp</span></a>
+                <a href="#contact" class="nav-link" data-section="contact"><i class="fas fa-envelope"></i><span>./contact</span></a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <button class="nav-btn" id="cmdPaletteBtn" title="Command palette (Ctrl+K)">
+                <i class="fas fa-terminal"></i>
+                <kbd>Ctrl+K</kbd>
+            </button>
+            <button class="nav-btn theme-toggle" id="themeToggle" title="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="nav-btn matrix-toggle" id="matrixToggle" title="Toggle matrix">
+                <i class="fas fa-th"></i>
+            </button>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
 
-### Interactive Elements
-- **Typing Animation**: Dynamic text that types and deletes itself in the hero section
-- **Smooth Scrolling**: Seamless navigation between sections
-- **Hover Effects**: Interactive cards with matrix-style hover states
-- **Progress Animations**: Animated skill bars that fill on scroll
-- **Mobile Responsive**: Fully functional on all devices
+    <!-- Command Palette -->
+    <div class="cmd-palette-overlay" id="cmdPaletteOverlay" hidden>
+        <div class="cmd-palette" role="dialog" aria-label="Command palette">
+            <div class="cmd-palette-header">
+                <i class="fas fa-search"></i>
+                <input type="text" id="cmdPaletteInput" placeholder="Type a command or section..." autocomplete="off">
+                <kbd>ESC</kbd>
+            </div>
+            <ul class="cmd-palette-list" id="cmdPaletteList"></ul>
+        </div>
+    </div>
 
-### Advanced Features
-- **Project Filtering**: Dynamic project showcase with status indicators
-- **Skills Categories**: Filterable skills by frontend, backend, and tools
-- **Contact Form**: Terminal-styled contact form with validation
-- **Theme Toggle**: Switch between dark and light themes
-- **Social Links**: Integrated social media links in terminal format
+    <!-- Project Modal -->
+    <div class="modal-overlay" id="projectModal" hidden>
+        <div class="modal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="btn close" id="modalClose"></span>
+                    <span class="btn minimize"></span>
+                    <span class="btn maximize"></span>
+                </div>
+                <div class="terminal-title" id="modalTitle">project@details</div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
 
-## 🛠️ Technologies Used
+    <main class="main-container">
+        <!-- Hero -->
+        <section class="hero-section section-reveal" id="home">
+            <div class="hero-badge">
+                <span class="pulse-dot"></span>
+                <span>SYSTEM ONLINE — v2.0</span>
+            </div>
+            <div class="hero-content">
+                <div class="hero-terminal glass-panel">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="btn close"></span>
+                            <span class="btn minimize"></span>
+                            <span class="btn maximize"></span>
+                        </div>
+                        <div class="terminal-title">about@SAHIL — bash</div>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="typing-text">
+                            <span class="prompt">$</span>
+                            <span id="typingText"></span>
+                            <span class="cursor">▌</span>
+                        </div>
+                        <div class="terminal-stats">
+                            <div class="stat-line">
+                                <span class="prompt">$</span>
+                                <span>cat developer.json | jq</span>
+                            </div>
+                            <div class="stat-content">
+                                <p><span class="key">"name":</span> <span class="value">"SAHIL"</span></p>
+                                <p><span class="key">"role":</span> <span class="value">"Full Stack Developer"</span></p>
+                                <p><span class="key">"focus":</span> <span class="value">"Creative Solutions & Automation"</span></p>
+                                <p><span class="key">"status":</span> <span class="value status-online">"● available_for_hire"</span></p>
+                                <p><span class="key">"location":</span> <span class="value">"Pune, Maharashtra, India"</span></p>
+                            </div>
+                        </div>
+                        <div class="hero-actions">
+                            <a href="#projects" class="btn-primary"><i class="fas fa-folder-open"></i> View Projects</a>
+                            <button class="btn-secondary" id="openTerminalBtn"><i class="fas fa-terminal"></i> Open CLI</button>
+                            <a href="https://github.com/Savage404E" class="btn-ghost" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="orbit-ring">
+                        <div class="orbit-dot"></div>
+                        <div class="orbit-dot delay-1"></div>
+                        <div class="orbit-dot delay-2"></div>
+                    </div>
+                    <div class="profile-hexagon">
+                        <div class="hex-glow"></div>
+                        <div class="hex-content">
+                            <i class="fas fa-code"></i>
+                        </div>
+                    </div>
+                    <div class="floating-tags">
+                        <span class="float-tag">JS</span>
+                        <span class="float-tag">Python</span>
+                        <span class="float-tag">React</span>
+                        <span class="float-tag">Node</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-- **HTML5**: Semantic markup with modern structure
-- **CSS3**: Advanced animations, grid layouts, and custom properties
-- **Vanilla JavaScript**: No frameworks - pure JavaScript for all interactions
-- **Font Awesome**: Icon library for UI elements
-- **Google Fonts**: JetBrains Mono and Space Grotesk for that developer aesthetic
+        <!-- Stats -->
+        <section class="stats-section section-reveal" id="about">
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card glass-panel">
+                    <div class="stat-icon"><i class="fas fa-rocket"></i></div>
+                    <div class="stat-number" data-target="8">0</div>
+                    <div class="stat-label">Projects Built</div>
+                </div>
+                <div class="stat-card glass-panel">
+                    <div class="stat-icon"><i class="fas fa-code-branch"></i></div>
+                    <div class="stat-number" data-target="3">0</div>
+                    <div class="stat-label">Years Coding</div>
+                </div>
+                <div class="stat-card glass-panel">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-number" data-target="18000">0</div>
+                    <div class="stat-label">Discord Community</div>
+                </div>
+                <div class="stat-card glass-panel">
+                    <div class="stat-icon"><i class="fas fa-mug-hot"></i></div>
+                    <div class="stat-number" data-target="999">0</div>
+                    <div class="stat-label">Cups of Coffee</div>
+                </div>
+            </div>
+        </section>
 
-## 📁 Project Structure
+        <!-- Projects -->
+        <section class="projects-section section-reveal" id="projects">
+            <div class="section-header">
+                <h2 class="section-title"><span class="prompt">$</span> ls -la projects/</h2>
+                <p class="section-subtitle">Filter by status · Click a card for details</p>
+                <div class="section-line"></div>
+            </div>
+            <div class="project-filters" id="projectFilters">
+                <button class="filter-btn active" data-filter="all">all</button>
+                <button class="filter-btn" data-filter="Active">active</button>
+                <button class="filter-btn" data-filter="Completed">completed</button>
+                <button class="filter-btn" data-filter="In Progress">in-progress</button>
+                <button class="filter-btn" data-filter="Planning">planning</button>
+            </div>
+            <div class="projects-grid" id="projectsGrid"></div>
+        </section>
 
-```
-p4/
-├── index.html          # Main HTML structure
-├── styles.css          # Complete styling with terminal theme
-├── script.js           # All JavaScript functionality
-└── README.md           # This file
-```
+        <!-- Skills -->
+        <section class="skills-section section-reveal" id="skills">
+            <div class="section-header">
+                <h2 class="section-title"><span class="prompt">$</span> Dev skills.txt</h2>
+                <p class="section-subtitle">Filter by stack · No rankings, just tools I use</p>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-container">
+                <div class="skill-categories" id="skillCategories">
+                    <div class="skill-category active" data-category="all"><i class="fas fa-layer-group"></i> All</div>
+                    <div class="skill-category" data-category="frontend"><i class="fab fa-html5"></i> Frontend</div>
+                    <div class="skill-category" data-category="backend"><i class="fas fa-server"></i> Backend</div>
+                    <div class="skill-category" data-category="tools"><i class="fas fa-wrench"></i> Tools</div>
+                </div>
+                <div class="skills-grid" id="skillsGrid"></div>
+            </div>
+        </section>
 
-## 🎨 Design System
+        <!-- Experience -->
+        <section class="experience-section section-reveal" id="experience">
+            <div class="section-header">
+                <h2 class="section-title"><span class="prompt">$</span> git log --oneline experience</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="timeline" id="timeline"></div>
+        </section>
 
-### Color Palette
-- **Terminal Green**: #00ff41 (Primary accent)
-- **Matrix Green**: #00ff00 (Background effects)
-- **Terminal Background**: #0d1117 (Dark terminal theme)
-- **Accent Pink**: #ff0080 (Secondary accent)
-- **Border Color**: #30363d (Terminal borders)
+        <!-- Contact -->
+        <section class="contact-section section-reveal" id="contact">
+            <div class="section-header">
+                <h2 class="section-title"><span class="prompt">$</span> ./contact.sh --connect</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="info-terminal glass-panel">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span class="btn close"></span>
+                                <span class="btn minimize"></span>
+                                <span class="btn maximize"></span>
+                            </div>
+                            <div class="terminal-title">info@SAHIL — links</div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="info-line">
+                                <span class="prompt">$</span>
+                                <span>cat social_links.txt</span>
+                            </div>
+                            <div class="social-links">
+                                <a href="https://github.com/Savage404E" class="social-link" target="_blank" rel="noopener">
+                                    <i class="fab fa-github"></i><span>GitHub</span><i class="fas fa-arrow-right link-arrow"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/sahil-kadam-473096383/" class="social-link" target="_blank" rel="noopener">
+                                    <i class="fab fa-linkedin"></i><span>LinkedIn</span><i class="fas fa-arrow-right link-arrow"></i>
+                                </a>
+                                <a href="https://discord.gg/besavage" class="social-link" target="_blank" rel="noopener">
+                                    <i class="fab fa-discord"></i><span>Discord Server (18K+ community)</span><i class="fas fa-arrow-right link-arrow"></i>
+                                </a>
+                                <a href="mailto:sahil22kadam@gmail.com" class="social-link">
+                                    <i class="fas fa-envelope"></i><span>Email</span><i class="fas fa-arrow-right link-arrow"></i>
+                                </a>
+                            </div>
+                            <div class="quick-cmd-hint">
+                                <span class="prompt">$</span>
+                                <span>hint: press <kbd>Ctrl+K</kbd> or type <code>help</code> in the CLI below</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-### Typography
-- **JetBrains Mono**: Primary monospace font for terminal feel
-- **Space Grotesk**: Modern sans-serif for contrast
+    <!-- Interactive CLI Dock -->
+    <div class="cli-dock minimized" id="cliDock">
+        <div class="cli-header" id="cliHeader">
+            <div class="cli-title">
+                <i class="fas fa-terminal"></i>
+                <span>SAHIL Terminal v2.0</span>
+                <span class="cli-status">● click to open</span>
+            </div>
+            <div class="cli-controls">
+                <button class="cli-btn" id="cliMinimize" title="Open terminal"><i class="fas fa-chevron-up"></i></button>
+                <button class="cli-btn" id="cliMaximize" title="Expand"><i class="fas fa-expand"></i></button>
+            </div>
+        </div>
+        <div class="cli-body" id="cliBody">
+            <div class="cli-output" id="cliOutput">
+                <div class="cli-welcome">Welcome to SAHIL Terminal v2.0 — Type <code>help</code> for commands</div>
+            </div>
+            <form class="cli-input-line" id="cliForm">
+                <span class="prompt">visitor@SAHIL</span><span class="path">:~$</span>
+                <input type="text" id="cliInput" autocomplete="off" spellcheck="false" placeholder="help">
+            </form>
+        </div>
+    </div>
 
-### Key Components
-- Terminal windows with realistic UI elements
-- Matrix rain background effect
-- Command-line styled navigation
-- Interactive project cards
-- Animated skill progress bars
-- Terminal-styled contact form
+    <footer class="footer">
+        <div class="footer-terminal glass-panel">
+            <div class="terminal-body">
+                <div class="footer-line">
+                    <span class="prompt">$</span>
+                    <span>echo "© 2026 SAHIL Portfolio | Built with passion · Press <kbd>Ctrl+K</kbd> anywhere"</span>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-## 🚀 Getting Started
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd profile-website/p4
-   ```
-
-2. **Run locally**
-   ```bash
-   # Using Python
-   python -m http.server 8000
-   
-   # Or using Node.js
-   npx serve .
-   
-   # Or using PHP
-   php -S localhost:8000
-   ```
-
-3. **Open in browser**
-   Navigate to `http://localhost:8000`
-
-## 🎯 Interactive Features
-
-### Loading Experience
-- Terminal boot sequence with realistic command output
-- Progressive loading messages
-- Smooth fade-out transition
-
-### Navigation System
-- Terminal-styled navigation bar
-- Smooth scroll to sections
-- Active section highlighting
-- Mobile hamburger menu with terminal aesthetic
-
-### Hero Section
-- Animated typing effect with multiple messages
-- Developer information displayed as terminal output
-- Hexagonal profile icon with code rain effect
-- Status indicator with pulse animation
-
-### Projects Showcase
-- Grid layout with terminal-styled cards
-- Project status badges (Active, Completed, In Progress)
-- Technology tags with terminal styling
-- GitHub and demo links
-- Hover animations with border effects
-
-### Skills Display
-- Category filtering (All, Frontend, Backend, Tools)
-- Animated progress bars
-- Terminal-styled skill cards
-- Responsive grid layout
-
-### Contact Form
-- Terminal window design
-- Command-line styled form fields
-- Form validation and feedback
-- Social links integration
-
-## 📱 Responsive Design
-
-The website is fully responsive with:
-- **Desktop**: Full terminal experience with all effects
-- **Tablet**: Optimized layout with touch interactions
-- **Mobile**: Simplified terminal interface with mobile menu
-
-## ⚡ Performance Features
-
-- Optimized animations using CSS transforms
-- Efficient JavaScript with async/await patterns
-- Lazy loading considerations
-- Smooth 60fps animations
-- Minimal resource usage
-
-## 🎨 Customization
-
-### Changing Colors
-Edit the CSS variables in `styles.css`:
-```css
-:root {
-    --terminal-green: #00ff41;
-    --terminal-bg: #0d1117;
-    --matrix-green: #00ff00;
-    /* ... other variables */
-}
-```
-
-### Modifying Projects
-Update the projects array in `script.js`:
-```javascript
-this.projects = [
-    {
-        title: 'Your Project',
-        description: 'Project description',
-        status: 'Active',
-        tech: ['Tech1', 'Tech2'],
-        github: '#',
-        demo: '#'
-    }
-];
-```
-
-### Adding Skills
-Update the skills array in `script.js`:
-```javascript
-this.skills = [
-    { name: 'Skill Name', level: 90, category: 'frontend' }
-];
-```
-
-## 🔧 Browser Support
-
-- Chrome/Chromium (latest 2 versions)
-- Firefox (latest 2 versions)
-- Safari (latest 2 versions)
-- Edge (latest 2 versions)
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 👤 Author
-
-**SAHIL**
-- Full Stack Developer
-- Creative Solutions Architect
-- Terminal Enthusiast
-
----
-
-*Built with passion for code and terminal aesthetics*
+    <script src="script.js"></script>
+</body>
+</html>

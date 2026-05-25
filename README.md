@@ -1,8 +1,8 @@
-# SAVAGE Portfolio - Terminal Developer Showcase
+# SAHIL Portfolio - Terminal Developer Showcase
 
 A cutting-edge portfolio website featuring a terminal/cyberpunk aesthetic with interactive elements and a unique developer presentation.
 
-![SAVAGE Portfolio](https://via.placeholder.com/800x400/0d1117/00ff41?text=SAVAGE+Portfolio+Terminal)
+![SAHIL Portfolio](https://via.placeholder.com/800x400/0d1117/00ff41?text=SAHIL+Portfolio+Terminal)
 
 ## 🚀 Unique Features
 
@@ -190,7 +190,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 👤 Author
 
-**SAVAGE**
+**SAHIL**
 - Full Stack Developer
 - Creative Solutions Architect
 - Terminal Enthusiast
